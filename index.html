@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AMAY | Don’t Trust Us. Verify Us.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --amay-green: #1b3022;
+      --amay-green-2: #2d4b35;
+      --amay-gold: #c5a059;
+      --cream: #f9f7f2;
+      --white: #ffffff;
+      --text-main: #222222;
+      --text-light: #666666;
+      --border: rgba(27, 48, 34, 0.12);
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text-main);
+      line-height: 1.65;
+    }
+
+    h1, h2, h3, h4, .brand-font {
+      font-family: 'Playfair Display', serif;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1200px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(249, 247, 242, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo-nav {
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--amay-green);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a:hover {
+      color: var(--amay-gold);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 0.95rem 1.6rem;
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--amay-green) 0%, var(--amay-green-2) 100%);
+      color: var(--white);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.15);
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.28);
+      backdrop-filter: blur(6px);
+    }
+
+    .hero {
+      min-height: 88vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(14, 25, 18, 0.78) 0%, rgba(14, 25, 18, 0.58) 38%, rgba(14, 25, 18, 0.28) 100%),
+        url('hero-farmer-cow.jpg') center center / cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(14,25,18,0.25), rgba(14,25,18,0.05));
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: min(760px, 100%);
+      padding: 70px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      color: #f6e8c8;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.7rem, 6vw, 5rem);
+      line-height: 1.05;
+      margin-bottom: 18px;
+      max-width: 10ch;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: #f0d59b;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 1.7vw, 1.2rem);
+      max-width: 58ch;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 30px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    section {
+      padding: 96px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto 56px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      color: var(--amay-green);
+      margin-bottom: 12px;
+    }
+
+    .section-head p {
+      color: var(--text-light);
+      font-size: 1.02rem;
+    }
+
+    .pillars {
+      background: var(--white);
+    }
+
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 26px;
+    }
+
+    .pillar-card {
+      background: linear-gradient(180deg, #fff 0%, #f7f4ed 100%);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .stamp {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(197, 160, 89, 0.12);
+      color: #8e6b2a;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .pillar-card h3 {
+      font-size: 1.5rem;
+      color: var(--amay-green);
+      margin-bottom: 12px;
+    }
+
+    .impact {
+      background: var(--cream);
+    }
+
+    .impact-wrap {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .impact-image {
+      min-height: 560px;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: url('farmer-family.jpg') center center / cover no-repeat;
+    }
+
+    .impact-text {
+      padding-right: 10px;
+    }
+
+    .impact-text h2 {
+      color: var(--amay-green);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.12;
+      margin-bottom: 18px;
+    }
+
+    .impact-text p {
+      color: var(--text-light);
+      margin-bottom: 16px;
+    }
+
+    .quote-box {
+      border-left: 4px solid var(--amay-gold);
+      padding-left: 18px;
+      color: #4c4c4c;
+      font-style: italic;
+      margin-top: 20px;
+    }
+
+    .products {
+      background: var(--white);
+    }
+
+    .product-list {
+      display: grid;
+      gap: 24px;
+    }
+
+    .product-card {
+      display: grid;
+      grid-template-columns: 250px 1.15fr 1fr;
+      gap: 26px;
+      align-items: center;
+      background: linear-gradient(180deg, #fff 0%, #fbf9f4 100%);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.05);
+    }
+
+    .product-visual {
+      position: relative;
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 20px;
+      padding: 18px;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-visual img {
+      max-height: 180px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .product-tag {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--amay-green);
+      background: rgba(27,48,34,0.08);
+    }
+
+    .product-copy h3 {
+      font-size: 1.7rem;
+      color: var(--amay-green);
+      margin-bottom: 10px;
+    }
+
+    .product-copy p {
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+
+    .key-line {
+      font-weight: 600;
+      color: #3c3c3c;
+      margin-top: 4px;
+    }
+
+    .pricing-box {
+      background: #f5f1e8;
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      border-radius: 22px;
+      padding: 22px;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .pricing-box h4 {
+      color: var(--amay-green);
+      margin-bottom: 14px;
+      font-size: 1.1rem;
+    }
+
+    .size-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(27,48,34,0.14);
+      color: #3c3c3c;
+      font-size: 0.96rem;
+    }
+
+    .size-row:last-child {
+      border-bottom: none;
+    }
+
+    .size-row strong {
+      color: var(--amay-green);
+    }
+
+    .subscription-features {
+      background: #f4efe4;
+    }
+
+    .subscription-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .subscription-card,
+    .subscription-pricing-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.06);
+    }
+
+    .subscription-card h3,
+    .subscription-pricing-card h3 {
+      color: var(--amay-green);
+      font-size: 1.7rem;
+      margin-bottom: 12px;
+    }
+
+    .subscription-card p,
+    .subscription-pricing-card p {
+      color: var(--text-light);
+      margin-bottom: 18px;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      padding: 0;
+    }
+
+    .feature-list li {
+      position: relative;
+      padding-left: 22px;
+      color: #3e3e3e;
+    }
+
+    .feature-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--amay-gold);
+      font-size: 1.1rem;
+      font-weight: 900;
+    }
+
+    .pricing-mini-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .pricing-mini-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 0;
+      border-bottom: 1px dashed rgba(27,48,34,0.14);
+      color: #3a3a3a;
+    }
+
+    .pricing-mini-item:last-child {
+      border-bottom: none;
+    }
+
+    .pricing-mini-item strong {
+      color: var(--amay-green);
+    }
+
+    .subscribe {
+      background: linear-gradient(135deg, var(--amay-green) 0%, #263b2b 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .subscribe h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 14px;
+    }
+
+    .subscribe p {
+      max-width: 760px;
+      margin: 0 auto 28px;
+      color: rgba(255,255,255,0.82);
+      font-size: 1.05rem;
+    }
+
+    footer {
+      background: #172019;
+      color: #cfcfcf;
+      text-align: center;
+      padding: 46px 0;
+    }
+
+    footer h2 {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+      color: #a8a8a8;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 1080px) {
+      .product-card {
+        grid-template-columns: 220px 1fr;
+      }
+
+      .pricing-box {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .pillar-grid,
+      .impact-wrap,
+      .subscription-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .impact-image {
+        min-height: 360px;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        flex-direction: column;
+        justify-content: center;
+        padding: 14px 0;
+      }
+
+      .hero {
+        min-height: 78vh;
+        background-position: center;
+      }
+
+      .product-card {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+
+      .product-visual {
+        min-height: 200px;
+      }
+
+      section {
+        padding: 72px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <img src="logo_24b5a3.png" alt="AMAY Logo" class="logo-nav" />
+      <div class="nav-links">
+        <a href="#verification">Verify</a>
+        <a href="#impact">Our Impact</a>
+        <a href="#products">Products</a>
+        <a href="#subscribe" class="btn btn-primary" style="padding: 0.72rem 1.25rem;">Try a Free Sample</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <span class="eyebrow">AMAY Organic Dairy</span>
+        <h1>Don’t Trust Us. <em>Verify Us.</em></h1>
+        <p>
+          From indigenous breeds, organic assurance and QR-based traceability
+          to live farm transparency, AMAY is built for families who want proof,
+          not promises.
+        </p>
+        <div class="hero-cta">
+          <a href="#products" class="btn btn-primary">Explore the Range</a>
+          <a href="#verification" class="btn btn-secondary">See How We Verify</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="verification" class="pillars">
+    <div class="container">
+      <div class="section-head">
+        <h2>Radical Transparency</h2>
+        <p>
+          India’s organic dairy story needs more than a purity claim. AMAY makes
+          trust measurable through traceability, indigenous sourcing and visible
+          proof across every pack.
+        </p>
+      </div>
+
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <span class="stamp">The Proof</span>
+          <h3>QR-Based Verification</h3>
+          <p>
+            Every jar and pack can carry a QR pathway that helps the customer
+            trace the product back to the farm and batch-level story.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <span class="stamp">The Source</span>
+          <h3>Indigenous A2 Focus</h3>
+          <p>
+            AMAY’s core range is built around A2 Gir milk and traditional dairy
+            formats, with premium nutrition and authentic sourcing at the center.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <span class="stamp">The Difference</span>
+          <h3>Proof Over Marketing</h3>
+          <p>
+            The brand promise is not “just believe us.” It is designed around
+            visible proof, cleaner ingredients and traditional processes
+            customers can understand.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="impact" class="impact">
+    <div class="container impact-wrap">
+      <div class="impact-image"></div>
+
+      <div class="impact-text">
+        <h2>Fair to the Farmer. Honest to the Family.</h2>
+        <p>
+          AMAY is designed to create dignity on both ends of the value chain:
+          better economics and respect for farmers, and better confidence for
+          families buying dairy every week.
+        </p>
+        <p>
+          That makes AMAY more than a product brand. It becomes a transparent
+          bridge between the farm and the urban household.
+        </p>
+        <div class="quote-box">
+          “The mother wants clean milk. The farmer deserves dignity. AMAY is built for both.”
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="products" class="products">
+    <div class="container">
+      <div class="section-head">
+        <h2>Explore the AMAY Product Portfolio</h2>
+        <p>
+          Product descriptions and pricing architecture adapted from your slide
+          so the portfolio reflects the actual AMAY range.
+        </p>
+      </div>
+
+      <div class="product-list">
+        <article class="product-card">
+          <div class="product-visual">
+            <img src="amay-gir-milk.png" alt="AMAY A2 Gir Cow Milk" />
+            <span class="product-tag">Tier 1 Product</span>
+          </div>
+          <div class="product-copy">
+            <h3>A2 Gir Cow Milk</h3>
+            <p>
+              The gold standard. Sourced exclusively from indigenous Gir breed
+              and positioned as the highest-trust daily milk option in the AMAY range.
+            </p>
+            <p class="key-line">
+              Highest A2 beta-casein content and richest everyday premium milk offering.
+            </p>
+          </div>
+          <div class="pricing-box">
+            <h4>Available Sizes & Price</h4>
+            <div class="size-row">
+              <span>Retail Pack</span>
+              <strong>₹110 / litre</strong>
+            </div>
+            <div class="size-row">
+              <span>Trial Pack</span>
+              <strong>₹35 / 200 ml</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-visual">
+            <img src="amay-bilona-ghee.png" alt="AMAY Bilona A2 Ghee" />
+            <span class="product-tag">Tier 2 Product</span>
+          </div>
+          <div class="product-copy">
+            <h3>Bilona A2 Ghee</h3>
+            <p>
+              Traditional bilona method. Curd hand-churned and slow-cooked,
+              preserving authentic flavor and nutrition.
+            </p>
+            <p class="key-line">
+              The hero proof-backed premium product built on traditional craftsmanship.
+            </p>
+          </div>
+          <div class="pricing-box">
+            <h4>Available Sizes & Price</h4>
+            <div class="size-row">
+              <span>500 ml Retail Pack</span>
+              <strong>₹1,250</strong>
+            </div>
+            <div class="size-row">
+              <span>1 kg Pack</span>
+              <strong>₹2,500</strong>
+            </div>
+            <div class="size-row">
+              <span>Trial Pack</span>
+              <strong>₹249 / 100 g</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-visual">
+            <img src="amay-paneer.png" alt="AMAY Farm Fresh A2 Paneer" />
+            <span class="product-tag">Tier 3 Product</span>
+          </div>
+          <div class="product-copy">
+            <h3>Farm Fresh A2 Paneer</h3>
+            <p>
+              Made fresh daily and delivered cold. Consumed within 48 hours with
+              no preservatives and a noticeably softer texture.
+            </p>
+            <p class="key-line">
+              A staple kitchen product that brings AMAY into everyday meals.
+            </p>
+          </div>
+          <div class="pricing-box">
+            <h4>Available Sizes & Price</h4>
+            <div class="size-row">
+              <span>200 g Retail Pack</span>
+              <strong>₹140</strong>
+            </div>
+            <div class="size-row">
+              <span>400 g Pack</span>
+              <strong>₹280</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-visual">
+            <img src="amay-curd.png" alt="AMAY Probiotic Curd" />
+            <span class="product-tag">Tier 4 Product</span>
+          </div>
+          <div class="product-copy">
+            <h3>Probiotic Curd</h3>
+            <p>
+              Probiotic curd with A2 milk base and live probiotic cultures built
+              for gut health and daily wellness.
+            </p>
+            <p class="key-line">
+              Designed for the health-conscious urban consumer.
+            </p>
+          </div>
+          <div class="pricing-box">
+            <h4>Available Sizes & Price</h4>
+            <div class="size-row">
+              <span>400 g Retail Pack</span>
+              <strong>₹75</strong>
+            </div>
+            <div class="size-row">
+              <span>Trial Pack</span>
+              <strong>₹40 / 200 g</strong>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="subscription-features">
+    <div class="container">
+      <div class="section-head">
+        <h2>AMAY Subscription Membership</h2>
+        <p>
+          Subscription pricing applies across the AMAY range, not only milk.
+          It is built to reward loyalty, improve convenience and make repeat purchase feel smarter.
+        </p>
+      </div>
+
+      <div class="subscription-grid">
+        <div class="subscription-card">
+          <span class="stamp">Membership Benefits</span>
+          <h3>Built for Everyday AMAY Users</h3>
+          <p>
+            The subscription is designed as a convenience + savings layer across products,
+            while also turning delivery into a premium daily touchpoint.
+          </p>
+          <ul class="feature-list">
+            <li>AMAY Membership at ₹799 per year</li>
+            <li>Unlocks 10% off across all products</li>
+            <li>6 AM cold-chain delivery at doorstep</li>
+            <li>A handpicked AMAY pack delivered on your child’s birthday</li>
+            <li>Direct WhatsApp support</li>
+            <li>Delivery becomes a brand touchpoint with 6 AM arrival and tamper-proof sealed packs</li>
+          </ul>
+        </div>
+
+        <div class="subscription-pricing-card">
+          <span class="stamp">Loyalty Pricing</span>
+          <h3>Subscription Prices Across Products</h3>
+          <p>
+            These are the slide-based subscription prices that apply to the broader AMAY portfolio.
+          </p>
+          <div class="pricing-mini-list">
+            <div class="pricing-mini-item">
+              <span>Membership fee</span>
+              <strong>₹799 / year</strong>
+            </div>
+            <div class="pricing-mini-item">
+              <span>A2 Gir Cow Milk</span>
+              <strong>₹99 / litre</strong>
+            </div>
+            <div class="pricing-mini-item">
+              <span>Bilona A2 Ghee</span>
+              <strong>₹2,070 / kg</strong>
+            </div>
+            <div class="pricing-mini-item">
+              <span>Farm Fresh Paneer</span>
+              <strong>₹252 / 400 g</strong>
+            </div>
+            <div class="pricing-mini-item">
+              <span>Probiotic Curd</span>
+              <strong>₹66.5 / 400 g</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="subscribe" class="subscribe">
+    <div class="container">
+      <h2>Proof-Led Pricing. Premium Without Blind Trust.</h2>
+      <p>
+        AMAY starts with low-risk trials, converts through full-size conviction,
+        deepens loyalty through subscription, and scales with credible institutional pricing.
+        It is not just a price list. It is a conversion architecture.
+      </p>
+      <a href="#products" class="btn btn-primary">View All Products</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <h2 class="brand-font">AMAY ORGANIC DAIRY</h2>
+      <p>Bengaluru | Mumbai | Gurugram | Delhi | Pune | Hyderabad</p>
+      <p>Derived from “Ameya” — immeasurable value.</p>
+      <p>© 2026 AMAY Organic Dairy. Don’t trust us. Verify us.</p>
+    </div>
+  </footer>
+</body>
+</html>
